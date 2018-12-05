@@ -1,24 +1,23 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { CoreContext } from "./core/packageLoader";
+import PackageLoader from "./core/packageLoader";
 
 class App extends Component {
+  static contextType = CoreContext;
+
   render() {
+    const { Profile, AwesomeButton } = this.context.Components;
+
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <Profile address="Lisbon" />
+          <AwesomeButton onClick={() => { PackageLoader.load('lazyLoad')}}>
+            Lazy load something
+          </AwesomeButton>
         </header>
       </div>
     );
